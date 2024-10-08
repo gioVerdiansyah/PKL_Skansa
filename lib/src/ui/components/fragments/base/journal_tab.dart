@@ -13,7 +13,9 @@ import 'package:pkl_smkn1mejayan_siswa/src/ui/utils/file_handler.dart';
 import '../../../../constants/color_constant.dart';
 
 class JournalTab extends StatefulWidget {
-  const JournalTab({super.key});
+  final BuildContext context;
+
+  const JournalTab({super.key, required this.context});
 
   @override
   State<JournalTab> createState() => _JournalTab();
@@ -60,15 +62,33 @@ class _JournalTab extends State<JournalTab> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          TextButton.icon(
-                            onPressed: () => (!fileSelected) ? _onPickFile() : _onCancel(),
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                              backgroundColor: ColorConstant.primary,
-                              foregroundColor: ColorConstant.white,
-                            ),
-                            icon: const Icon(Icons.file_open_rounded),
-                            label: Text(fileSelected ? "Batal" : "Pilih file"),
+                          Row(
+                            children: [
+                              TextButton.icon(
+                                onPressed: () => (!fileSelected) ? _onPickFile() : _onCancel(),
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                  backgroundColor: ColorConstant.primary,
+                                  foregroundColor: ColorConstant.white,
+                                ),
+                                icon: const Icon(Icons.file_open_rounded),
+                                label: Text(fileSelected ? "Batal" : "Pilih file"),
+                              ),
+                              const SizedBox(width: 20,),
+                              TextButton.icon(
+                                onPressed: (){
+                                  // TODO: SEND TO API
+                                  Navigator.pop(widget.context);
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                  backgroundColor: ColorConstant.primary,
+                                  foregroundColor: ColorConstant.white,
+                                ),
+                                icon: const Icon(Icons.send_rounded),
+                                label: const Text("Submit"),
+                              ),
+                            ],
                           ),
                           const SizedBox(height: 20),
                           if (state.journalFileInfo != null)

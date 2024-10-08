@@ -48,6 +48,7 @@ dependencies:
   form_builder_file_picker: ^4.2.0
   equatable: ^2.0.5
   page_transition: ^2.1.0
+  toastification: ^2.3.0
 
 dev_dependencies:
   flutter_test:

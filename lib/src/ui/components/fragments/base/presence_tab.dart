@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swipe_button/flutter_swipe_button.dart';
 import 'package:pkl_smkn1mejayan_siswa/src/constants/color_constant.dart';
+import 'package:pkl_smkn1mejayan_siswa/src/ui/components/commons/alert.dart';
 import 'package:pkl_smkn1mejayan_siswa/src/ui/screen_routes.dart';
+import 'package:pkl_smkn1mejayan_siswa/src/ui/utils/location_handler.dart';
 
 class PresenceTab extends StatefulWidget {
-  const PresenceTab({super.key});
+  final BuildContext context;
+
+  const PresenceTab({super.key, required this.context});
 
   @override
 State<PresenceTab> createState() => _PresenceTab();
@@ -13,6 +17,7 @@ State<PresenceTab> createState() => _PresenceTab();
 class _PresenceTab extends State<PresenceTab> {
   String _selectedPresence = "Hadir";
   List<String> options = ["Hadir", "Pulang", "WFH"];
+  LocationHandler currentLocation = LocationHandler();
 
   void _onSelectedPresence(String value) {
     setState(() {
@@ -104,9 +109,14 @@ class _PresenceTab extends State<PresenceTab> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              onSwipe: () {
+              onSwipe: () async{
+                // TODO: SEND TO API
+
+                // String? locationString = await currentLocation.getCurrentLocationAsString();
                 print(_selectedPresence);
-                // Logika pengiriman data ke backend dapat ditambahkan di sini
+                // print(locationString);
+                Navigator.pop(widget.context);
+                Alert.success(context,"Berhasil absen, Namun", messages: "Anda telat 10 menit");
               },
             ),
           )

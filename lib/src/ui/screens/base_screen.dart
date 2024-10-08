@@ -128,10 +128,10 @@ class _BaseView extends State<BaseScreen> with SingleTickerProviderStateMixin {
                               const SizedBox(height: 10),
                               SizedBox(
                                 height: keyboardHeight > 0 ? 500 : 350,
-                                child: const TabBarView(
+                                child: TabBarView(
                                   children: [
-                                    PresenceTab(),
-                                    JournalTab()
+                                    PresenceTab(context: bottomSheetContext),
+                                    JournalTab(context: bottomSheetContext)
                                   ],
                                 ),
                               ),

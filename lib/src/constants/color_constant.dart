@@ -11,4 +11,6 @@ class ColorConstant{
   static const Color semiWhite = Color.fromRGBO(211, 255, 239, 1.0);
   static const Color black = Colors.black87;
   static const Color gray = Colors.black54;
+
+  static const Color red = Color.fromRGBO(208, 0, 0, 1);
 }
