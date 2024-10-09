@@ -5,6 +5,7 @@ import 'package:pkl_smkn1mejayan_siswa/src/ui/components/fragments/base/journal_
 import 'package:pkl_smkn1mejayan_siswa/src/ui/components/fragments/base/presence_tab.dart';
 import 'package:pkl_smkn1mejayan_siswa/src/ui/screens/home_screen.dart';
 import 'package:pkl_smkn1mejayan_siswa/src/constants/color_constant.dart';
+import 'package:pkl_smkn1mejayan_siswa/src/ui/screens/profile_screen.dart';
 
 class BaseScreen extends StatefulWidget {
   const BaseScreen({super.key});
@@ -35,18 +36,7 @@ class _BaseView extends State<BaseScreen> with SingleTickerProviderStateMixin {
 
     _pages = <Widget>[
       HomeScreen(isHideBottomNavBar: toggleBottomNavBar),
-      Text(
-        'Index 1: Business',
-        style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-      ),
-      Text(
-        'Index 2: School',
-        style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-      ),
-      Text(
-        'Index 3: Settings',
-        style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-      ),
+      ProfileScreen(isHideBottomNavBar: toggleBottomNavBar)
     ];
   }
 
@@ -81,6 +71,7 @@ class _BaseView extends State<BaseScreen> with SingleTickerProviderStateMixin {
                 backgroundColor: ColorConstant.primary,
                 currentIndex: _selectedIndex,
                 selectedItemColor: ColorConstant.warm,
+                unselectedItemColor: ColorConstant.white,
                 onTap: _onItemTapped,
               ),
             ),

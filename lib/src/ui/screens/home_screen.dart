@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:pkl_smkn1mejayan_siswa/src/constants/asset_constant.dart';
 import 'package:pkl_smkn1mejayan_siswa/src/ui/components/fragments/home/accordion_history.dart';
 import 'package:pkl_smkn1mejayan_siswa/src/ui/screen_routes.dart';
 import 'package:pkl_smkn1mejayan_siswa/src/ui/utils/string_handler.dart';
@@ -42,7 +43,13 @@ class _HomeView extends State<HomeScreen> with AutomaticKeepAliveClientMixin<Hom
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Image.asset("assets/images/male_profile.png", height: 50),
+                          ClipOval(
+                              child: Image.asset(
+                            AssetConstant.maleProfile,
+                            height: 50,
+                            width: 50,
+                            fit: BoxFit.cover,
+                          )),
                           const Expanded(
                             flex: 2,
                             child: Padding(
@@ -92,7 +99,7 @@ class _HomeView extends State<HomeScreen> with AutomaticKeepAliveClientMixin<Hom
                     height: 200,
                     decoration: BoxDecoration(
                       image: const DecorationImage(
-                        image: AssetImage("assets/images/abstract_bg.png"),
+                        image: AssetImage(AssetConstant.abstractBackground),
                         fit: BoxFit.cover,
                       ),
                       borderRadius: BorderRadius.circular(10),
