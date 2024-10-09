@@ -17,9 +17,7 @@ class _PermitView extends State<PermitScreen>{
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar: const MyAppBar(
-        title: "Izin",
-      ),
+      appBar: const MyAppBar(title: "Izin",),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: FormBuilder(
