@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:pkl_smkn1mejayan_siswa/src/constants/color_constant.dart';
+import 'package:pkl_smkn1mejayan_siswa/src/ui/components/commons/my_app_bar.dart';
 import 'package:pkl_smkn1mejayan_siswa/src/ui/screen_routes.dart';
 
 class PermitScreen extends StatefulWidget{
@@ -16,8 +17,8 @@ class _PermitView extends State<PermitScreen>{
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Izin absen"),
+      appBar: const MyAppBar(
+        title: "Izin",
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),

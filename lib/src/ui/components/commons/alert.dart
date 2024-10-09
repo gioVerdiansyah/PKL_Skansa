@@ -56,7 +56,25 @@ class Alert {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
       margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       borderRadius: BorderRadius.circular(12),
-      showProgressBar: false
+      showProgressBar: false,
+      animationBuilder: (
+          BuildContext context,
+          Animation<double> animation,
+          Alignment alignment,
+          Widget child,
+          ) {
+        return SlideTransition(
+          position: Tween<Offset>(
+            begin: const Offset(0, -1),
+            end: Offset.zero,
+          ).animate(CurvedAnimation(
+            parent: animation,
+            curve: Curves.easeOut,
+            reverseCurve: Curves.easeIn,
+          )),
+          child: child,
+        );
+      },
     );
   }
 }
