@@ -3,7 +3,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:pkl_smkn1mejayan_siswa/src/constants/color_constant.dart';
 
-class TextInput extends StatelessWidget {
+class TextInput extends StatefulWidget {
   final String name;
   final String labelText;
   final TextInputType keyboardType;
@@ -30,6 +30,7 @@ class TextInput extends StatelessWidget {
   factory TextInput.basic({
     required String name,
     required String labelText,
+    TextInputType type = TextInputType.text,
     String? Function(String?)? validator,
     void Function(String?)? onChanged,
     String? initialValue,
@@ -37,6 +38,7 @@ class TextInput extends StatelessWidget {
     return TextInput._(
       name: name,
       labelText: labelText,
+      keyboardType: type,
       validator: validator,
       onChanged: onChanged,
       initialValue: initialValue,
@@ -62,20 +64,50 @@ class TextInput extends StatelessWidget {
     );
   }
 
+  factory TextInput.password({
+    required String name,
+    required String labelText,
+    String? Function(String?)? validator,
+    void Function(String?)? onChanged,
+    String? initialValue,
+  }) {
+    return TextInput._(
+      name: name,
+      labelText: labelText,
+      obscureText: true, // Password field default to obscure
+      validator: validator,
+      onChanged: onChanged,
+      initialValue: initialValue,
+    );
+  }
+
+  @override
+  _TextInputState createState() => _TextInputState();
+}
+
+class _TextInputState extends State<TextInput> {
+  bool _obscureText = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _obscureText = widget.obscureText;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         FormBuilderTextField(
-          name: name,
-          keyboardType: keyboardType,
-          obscureText: obscureText,
-          maxLines: maxLine,
-          initialValue: initialValue,
+          name: widget.name,
+          keyboardType: widget.keyboardType,
+          obscureText: _obscureText,
+          maxLines: widget.maxLine ?? 1,
+          initialValue: widget.initialValue,
           decoration: InputDecoration(
-            labelText: labelText,
-            floatingLabelBehavior: floatingLabel ? FloatingLabelBehavior.always : null,
+            labelText: widget.labelText,
+            floatingLabelBehavior: widget.floatingLabel ? FloatingLabelBehavior.always : null,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),
               borderSide: const BorderSide(
@@ -99,9 +131,22 @@ class TextInput extends StatelessWidget {
             ),
             isDense: true,
             contentPadding: const EdgeInsets.all(12.0),
+            suffixIcon: widget.obscureText
+                ? IconButton(
+              icon: Icon(
+                _obscureText ? Icons.visibility_off : Icons.visibility,
+                color: Colors.grey,
+              ),
+              onPressed: () {
+                setState(() {
+                  _obscureText = !_obscureText;
+                });
+              },
+            )
+                : null,
           ),
-          validator: validator,
-          onChanged: onChanged,
+          validator: widget.validator,
+          onChanged: widget.onChanged,
         ),
       ],
     );

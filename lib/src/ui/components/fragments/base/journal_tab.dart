@@ -32,7 +32,6 @@ class _JournalTab extends State<JournalTab> {
   void _onCancel() async {
     await clearFileCache();
     context.read<FillJournalBloc>().add(RemoveJournalFileEvent());
-    setState(() {});
   }
 
   @override

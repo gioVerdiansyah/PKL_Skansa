@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 
 import '../../../../constants/color_constant.dart';
 
-class ListTileTo extends StatelessWidget {
+class ListTileClick extends StatelessWidget {
   final IconData icon;
   final String title;
-  final String to;
+  final VoidCallback? onClick;
   final Color? color;
   final bool isEnd;
 
-  const ListTileTo({super.key, required this.icon, required this.title, required this.to, this.color, this.isEnd = false});
+  const ListTileClick({super.key, required this.icon, required this.title, required this.onClick, this.color, this.isEnd =
+  false});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class ListTileTo extends StatelessWidget {
           bottom: isEnd ? const BorderSide(color: ColorConstant.gray) : BorderSide.none
         )),
         child: TextButton(
-          onPressed: () => Navigator.of(context).pushNamed(to),
+          onPressed: onClick,
           style: const ButtonStyle(
               shape: WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8))))),
           child: Row(

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pkl_smkn1mejayan_siswa/src/constants/asset_constant.dart';
+import 'package:pkl_smkn1mejayan_siswa/src/ui/components/commons/show_dialog.dart';
 import 'package:pkl_smkn1mejayan_siswa/src/ui/screen_routes.dart';
-import 'package:pkl_smkn1mejayan_siswa/src/ui/utils/string_handler.dart';
 
 import '../../constants/color_constant.dart';
 import '../components/fragments/profile/list_tile_to.dart';
+import '../utils/int_handler.dart';
 import '../utils/scroll_notification_handler.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -82,31 +83,36 @@ class _ProfileView extends State<ProfileScreen> with AutomaticKeepAliveClientMix
                         ),
                       ),
                     ),
-                    const SizedBox(height: 50,),
-                    const ListTileTo(
+                    const SizedBox(height: 40,),
+                    ListTileClick(
                       icon: Icons.person,
                       title: "Edit Profil",
-                      to: ScreenRoutes.journalDetailRoute,
+                      onClick: () => Navigator.of(context).pushNamed(ScreenRoutes.editProfileRoute),
                     ),
-                    const ListTileTo(
+                    ListTileClick(
                       icon: Icons.password_rounded,
                       title: "Ganti password",
-                      to: ScreenRoutes.journalDetailRoute,
+                      onClick: () => Navigator.of(context).pushNamed(ScreenRoutes.changePasswordRoute),
                     ),
-                    const ListTileTo(
+                    ListTileClick(
                       icon: Icons.checklist_rounded,
                       title: "Histori absensi",
-                      to: ScreenRoutes.presenceDetailRoute,
+                      onClick: () => Navigator.of(context).pushNamed(ScreenRoutes.presenceDetailRoute),
                     ),
-                    const ListTileTo(
+                    ListTileClick(
                       icon: Icons.book_rounded,
                       title: "Histori jurnal",
-                      to: ScreenRoutes.journalDetailRoute,
+                      onClick: () => Navigator.of(context).pushNamed(ScreenRoutes.journalDetailRoute),
                     ),
-                    const ListTileTo(
+                    ListTileClick(
                       icon: Icons.logout_outlined,
                       title: "Logout",
-                      to: ScreenRoutes.journalDetailRoute,
+                      onClick: () => ShowDialog.confirm(
+                        context: context,
+                        title: "Apakah Anda yakin melakukan logout?",
+                        content: "Cache akan hilang dan Anda akan di minta untuk melakukan login kembali!",
+                        suggestOnCancel: true
+                      ),
                       isEnd: true,
                       color: ColorConstant.red,
                     ),

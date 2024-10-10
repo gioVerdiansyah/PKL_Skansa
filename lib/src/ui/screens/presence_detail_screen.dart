@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pkl_smkn1mejayan_siswa/src/ui/components/commons/my_app_bar.dart';
 
@@ -16,23 +15,52 @@ class PresenceDetailScreen extends StatefulWidget {
 }
 
 class _PresenceDetailView extends State<PresenceDetailScreen> {
+  final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
+  final List<Map<String, dynamic>> _dataDummies = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadData(15);
+  }
+
+  Future<void> _loadData(int count)async{
+    for(int i = 0; i <= count; i++){
+      await Future.delayed(const Duration(milliseconds: 300));
+      _dataDummies.add({
+        'status': 'Hadir',
+        'tanggal': 'Kamis, 20 Oktober 2024',
+        'datang': '08:00:32',
+        'pulang': '16:23:32',
+        'telat': '15 menit 05 detik'
+      });
+      _listKey.currentState?.insertItem(i);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const MyAppBar(
         title: "Detail Absensi",
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 3),
-        child: Column(
-          children: List.generate(
-            10,
-            (index) => const Padding(
-              padding: EdgeInsets.only(bottom: 10),
+      body: AnimatedList(
+        key: _listKey,
+        initialItemCount: _dataDummies.length,
+        itemBuilder: (context, index, animation){
+          var data = _dataDummies[index];
+
+          return SlideTransition(
+            position: Tween<Offset>(
+              begin: const Offset(1, 0),
+              end: Offset.zero
+            ).animate(animation),
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 10),
               child: Card(
                 color: ColorConstant.white,
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -40,48 +68,48 @@ class _PresenceDetailView extends State<PresenceDetailScreen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "Hadir",
+                          const Text(
+                            "Datang",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            "08:00:32",
-                            style: TextStyle(color: ColorConstant.black),
+                            data["datang"],
+                            style: const TextStyle(color: ColorConstant.black),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
-                          Text(
-                            "Hadir",
+                          const Text(
+                            "Pulang",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            "16:23:32",
-                            style: TextStyle(color: ColorConstant.black),
+                            data['pulang'],
+                            style: const TextStyle(color: ColorConstant.black),
                           ),
                         ],
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             "Telat",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            "5 menit",
-                            style: TextStyle(color: ColorConstant.black),
+                            data['telat'],
+                            style: const TextStyle(color: ColorConstant.black),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
-                          Text(
+                          const Text(
                             "Status",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            "Hadir",
-                            style: TextStyle(color: ColorConstant.black),
+                            data['status'],
+                            style: const TextStyle(color: ColorConstant.black),
                           ),
                         ],
                       ),
@@ -90,7 +118,7 @@ class _PresenceDetailView extends State<PresenceDetailScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            Text("Kamis, 12 Oktober 2024", textAlign: TextAlign.end, style: TextStyle(fontWeight: FontWeight.bold))
+                            Text(data['tanggal'], textAlign: TextAlign.end, style: const TextStyle(fontWeight: FontWeight.bold))
                           ],
                         ),
                       )
@@ -99,9 +127,9 @@ class _PresenceDetailView extends State<PresenceDetailScreen> {
                 ),
               ),
             ),
-          ),
-        ),
-      ),
+          );
+        },
+      )
     );
   }
 }

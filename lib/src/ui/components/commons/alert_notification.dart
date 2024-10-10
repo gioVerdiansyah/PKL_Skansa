@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pkl_smkn1mejayan_siswa/src/constants/color_constant.dart';
 import 'package:toastification/toastification.dart';
 
-class Alert {
+class AlertNotification {
   static error(BuildContext context, String title, {String? messages, int? duration}) {
     return _showAlert(
       context: context,

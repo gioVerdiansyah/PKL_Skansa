@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swipe_button/flutter_swipe_button.dart';
 import 'package:pkl_smkn1mejayan_siswa/src/constants/color_constant.dart';
-import 'package:pkl_smkn1mejayan_siswa/src/ui/components/commons/alert.dart';
+import 'package:pkl_smkn1mejayan_siswa/src/ui/components/commons/alert_notification.dart';
 import 'package:pkl_smkn1mejayan_siswa/src/ui/screen_routes.dart';
 import 'package:pkl_smkn1mejayan_siswa/src/ui/utils/location_handler.dart';
 
@@ -116,7 +116,7 @@ class _PresenceTab extends State<PresenceTab> {
                 print(_selectedPresence);
                 // print(locationString);
                 Navigator.pop(widget.context);
-                Alert.success(context,"Berhasil absen, Namun", messages: "Anda telat 10 menit");
+                AlertNotification.success(context,"Berhasil absen, Namun", messages: "Anda telat 10 menit");
               },
             ),
           )
